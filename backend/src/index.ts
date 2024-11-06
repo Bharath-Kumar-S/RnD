@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { redisClient } from "./service/redis";
 import * as dotenv from "dotenv";
 import { priceRouter } from "./router/priceRouter";
 
@@ -19,4 +20,7 @@ app.listen(PORT, () => {
   console.log(
     `⚡️⚡️⚡️[server]: Server is running at https://localhost:${PORT} ⚡️⚡️⚡️`
   );
+  if (redisClient.isOpen) {
+    console.log("Redis client is connected");
+  }
 });
