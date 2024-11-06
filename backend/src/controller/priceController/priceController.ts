@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import * as dotenv from "dotenv";
-import { PriceHistory } from "../../models/priceHistory"; // Adjust path as necessary
+import { PriceHistory } from "../../models/priceHistory";
+import { redisClient } from "../../service/redis"; // Import Redis client
 dotenv.config();
 
 export const getPrice = async (req: Request, res: Response) => {
@@ -10,11 +11,18 @@ export const getPrice = async (req: Request, res: Response) => {
     return res.status(400).json({ error: "Symbol is required" });
   }
 
-  const pricingServiceUrl = `${process.env.PRICING_SERVICE_API}?symbol=${String(
-    symbol
-  ).replace(/\//g, "")}`;
+  const pair = String(symbol).replace(/\//g, "");
+  const reversePair = String(symbol).split("/").reverse().join("");
+  const redisKey = `price:${pair}`;
 
   try {
+    const cachedPrice = await redisClient.get(redisKey);
+    if (cachedPrice) {
+      console.log("cachedPrice", cachedPrice);
+      return res.status(200).json(JSON.parse(cachedPrice));
+    }
+
+    const pricingServiceUrl = `${process.env.PRICING_SERVICE_API}?symbol=${pair}`;
     const response = await fetch(pricingServiceUrl);
 
     if (!response.ok) {
@@ -25,20 +33,19 @@ export const getPrice = async (req: Request, res: Response) => {
     const tonUsdtPrice = parseFloat(data.price);
 
     const prices = {
-      [String(symbol).replace(/\//g, "")]: tonUsdtPrice,
-      [String(symbol).split("/").reverse().join("")]: 1 / tonUsdtPrice,
+      [pair]: tonUsdtPrice,
+      [reversePair]: 1 / tonUsdtPrice,
     };
 
-    // Save the price data to the database
     const newPriceHistory = new PriceHistory({
-      pair: String(symbol).replace(/\//g, ""),
+      pair,
       price: tonUsdtPrice,
       inversePrice: 1 / tonUsdtPrice,
     });
 
     await newPriceHistory.save();
-
-    return res.status(200).send(prices);
+    await redisClient.setEx(redisKey, 1800, JSON.stringify(prices));
+    return res.status(200).json(prices);
   } catch (error) {
     console.error("Error fetching data:", error);
     return res.status(500).json({ error: "External API failure" });
