@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { settings } from "./settings";
+import { PriceCard } from "./components/PriceCard/PriceCard";
 
 function App() {
   const [prices, setPrices] = useState();
@@ -18,15 +19,9 @@ function App() {
 
   return (
     <div className="flex justify-center gap-4">
-      {prices && (
-        <h3 className="font-bold">
-          TON/USDT: <span className="font-extrabold">{prices}</span>
-        </h3>
-      )}
+      {prices && <PriceCard currency="TON/USDT" price={prices} />}
       {invertedPrices && (
-        <h3 className="font-bold">
-          USDT/TON: <span className="font-extrabold">{invertedPrices}</span>
-        </h3>
+        <PriceCard currency="USDT/TON" price={invertedPrices} />
       )}
     </div>
   );
