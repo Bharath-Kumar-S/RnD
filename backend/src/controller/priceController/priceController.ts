@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import * as dotenv from "dotenv";
 import { PriceHistory } from "../../models/priceHistory";
-import { redisClient } from "../../service/redis"; // Import Redis client
+import { redisClient } from "../../service/redis";
 dotenv.config();
 
 export const getPrice = async (req: Request, res: Response) => {
@@ -18,7 +18,6 @@ export const getPrice = async (req: Request, res: Response) => {
   try {
     const cachedPrice = await redisClient.get(redisKey);
     if (cachedPrice) {
-      console.log("cachedPrice", cachedPrice);
       return res.status(200).json(JSON.parse(cachedPrice));
     }
 

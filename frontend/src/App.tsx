@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [prices, setPrices] = useState();
+  const [invertedPrices, setInvertedPrices] = useState();
+
+  useEffect(() => {
+    fetch("http://localhost:5001/price?symbol=TON/USDT")
+      .then((response) => response.json())
+      .then((data) => {
+        setPrices(data.TONUSDT);
+        setInvertedPrices(data.USDTTON);
+      })
+      .catch((error) => console.error("Error fetching prices:", error));
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ display: "flex", gap: "5rem", justifyContent: "center" }}>
+      {prices && <h3>TON/USDT: {prices}</h3>}
+      {invertedPrices && <h3>USDT/TON: {invertedPrices}</h3>}
+    </div>
+  );
 }
 
-export default App
+export default App;

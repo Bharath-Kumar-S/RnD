@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
 import { redisClient } from "./service/redis";
 import * as dotenv from "dotenv";
 import { priceRouter } from "./router/priceRouter";
@@ -9,6 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT ?? 5001;
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/health-check", (req: Request, res: Response) => {
