@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { settings } from "./settings";
 
 function App() {
   const [prices, setPrices] = useState();
   const [invertedPrices, setInvertedPrices] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:5001/price?symbol=TON/USDT")
+    fetch(`${settings.api.baseUrl}/price?symbol=TON/USDT`)
       .then((response) => response.json())
       .then((data) => {
         setPrices(data.TONUSDT);
@@ -16,9 +17,17 @@ function App() {
   }, []);
 
   return (
-    <div style={{ display: "flex", gap: "5rem", justifyContent: "center" }}>
-      {prices && <h3>TON/USDT: {prices}</h3>}
-      {invertedPrices && <h3>USDT/TON: {invertedPrices}</h3>}
+    <div className="flex justify-center gap-4">
+      {prices && (
+        <h3 className="font-bold">
+          TON/USDT: <span className="font-extrabold">{prices}</span>
+        </h3>
+      )}
+      {invertedPrices && (
+        <h3 className="font-bold">
+          USDT/TON: <span className="font-extrabold">{invertedPrices}</span>
+        </h3>
+      )}
     </div>
   );
 }
