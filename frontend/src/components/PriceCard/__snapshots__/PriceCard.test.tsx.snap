@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PriceCard > should match snapshots 1`] = `
+<div>
+  <h3
+    class="font-bold"
+  >
+    GBP
+    : 
+    <span
+      class="font-extrabold"
+    >
+      300
+    </span>
+  </h3>
+</div>
+`;
