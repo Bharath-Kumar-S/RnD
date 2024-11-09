@@ -2,16 +2,23 @@
 
 exports[`PriceCard > should match snapshots 1`] = `
 <div>
-  <h3
-    class="font-bold"
+  <div
+    class="bg-blue-700 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20"
   >
-    GBP
-    : 
-    <span
-      class="font-extrabold"
+    <h2
+      class="text-xl font-semibold text-blue-200 mb-4"
     >
-      300
-    </span>
-  </h3>
+      GBP
+    </h2>
+    <div
+      class="flex items-baseline justify-between"
+    >
+      <span
+        class="text-3xl font-bold text-white"
+      >
+        300.0000
+      </span>
+    </div>
+  </div>
 </div>
 `;

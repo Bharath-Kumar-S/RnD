@@ -18,11 +18,15 @@ function App() {
   }, []);
 
   return (
-    <div className="flex justify-center gap-4">
-      {prices && <PriceCard currency="TON/USDT" price={prices} />}
-      {invertedPrices && (
-        <PriceCard currency="USDT/TON" price={invertedPrices} />
-      )}
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-center gap-4">
+          {prices && <PriceCard currency="TON/USDT" price={prices} />}
+          {invertedPrices && (
+            <PriceCard currency="USDT/TON" price={invertedPrices} />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
