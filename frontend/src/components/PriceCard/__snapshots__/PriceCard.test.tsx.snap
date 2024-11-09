@@ -3,7 +3,7 @@
 exports[`PriceCard > should match snapshots 1`] = `
 <div>
   <div
-    class="bg-blue-700 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20"
+    class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20"
   >
     <h2
       class="text-xl font-semibold text-blue-200 mb-4"
