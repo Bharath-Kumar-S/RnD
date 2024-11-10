@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
+import mongoose from "mongoose";
+import * as dotenv from "dotenv";
 import cors from "cors";
 import { redisClient } from "./service/redis";
-import * as dotenv from "dotenv";
 import { priceRouter } from "./router/priceRouter";
-import mongoose from "mongoose";
+import { historyRouter } from "./router/historyRouter";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.get("/health-check", (req: Request, res: Response) => {
 });
 
 app.use("/price", priceRouter);
+app.use("/history", historyRouter);
 
 app.listen(PORT, () => {
   console.log(
