@@ -5,7 +5,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "nodemon --exec ts-node --files src/index.ts",
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register --files src/server.ts",
     "test": "jest"
   },
   "jest": {
@@ -23,6 +23,7 @@
     "nodemon": "^3.1.4",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "tslib": "^2.7.0",
     "typescript": "^5.5.4"
   },
