@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PriceHistory } from "../../models/priceHistory";
+import { PriceHistory } from "@/models/priceHistory";
 
 export const getHistory = async (req: Request, res: Response) => {
   try {

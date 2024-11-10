@@ -2,9 +2,9 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import cors from "cors";
-import { redisClient } from "./service/redis";
-import { priceRouter } from "./router/priceRouter";
-import { historyRouter } from "./router/historyRouter";
+import { redisClient } from "@/service/redis";
+import { priceRouter } from "@/router/priceRouter";
+import { historyRouter } from "@/router/historyRouter";
 
 dotenv.config();
 

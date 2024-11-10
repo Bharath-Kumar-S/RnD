@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import * as dotenv from "dotenv";
-import { PriceHistory } from "../../models/priceHistory";
-import { redisClient } from "../../service/redis";
+import { PriceHistory } from "@/models/priceHistory";
+import { redisClient } from "@/service/redis";
 dotenv.config();
 
 export const getPrice = async (req: Request, res: Response) => {
