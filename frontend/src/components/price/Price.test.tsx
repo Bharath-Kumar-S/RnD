@@ -1,13 +1,14 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "./App";
-import { useGetPrice } from "./hooks/api/useGetPrice";
+import { Price } from "./Price";
+import { useGetPrice } from "@/hooks/api/useGetPrice";
 import { vi } from "vitest";
+import { BrowserRouter } from "react-router-dom";
 
-vi.mock("./hooks/api/useGetPrice", () => ({
+vi.mock("../../hooks/api/useGetPrice", () => ({
   useGetPrice: vi.fn(),
 }));
 
-describe("App Component", () => {
+describe("Price Component", () => {
   it("displays loading message when data is being fetched", async () => {
     (useGetPrice as jest.Mock).mockReturnValue({
       data: null,
@@ -15,7 +16,11 @@ describe("App Component", () => {
       isError: false,
     });
 
-    render(<App />);
+    render(
+      <BrowserRouter>
+        <Price />
+      </BrowserRouter>
+    );
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
@@ -27,7 +32,11 @@ describe("App Component", () => {
       isError: true,
     });
 
-    render(<App />);
+    render(
+      <BrowserRouter>
+        <Price />
+      </BrowserRouter>
+    );
 
     expect(screen.getByText("Error fetching data.")).toBeInTheDocument();
   });
@@ -43,7 +52,11 @@ describe("App Component", () => {
       isError: false,
     });
 
-    render(<App />);
+    render(
+      <BrowserRouter>
+        <Price />
+      </BrowserRouter>
+    );
 
     expect(screen.getAllByText("TON/USDT")[1]).toBeInTheDocument();
     expect(screen.getByText("1.230000")).toBeInTheDocument();
@@ -62,7 +75,11 @@ describe("App Component", () => {
       isError: false,
     });
 
-    render(<App />);
+    render(
+      <BrowserRouter>
+        <Price />
+      </BrowserRouter>
+    );
 
     fireEvent.change(screen.getByRole("combobox"), {
       target: { value: "ETH/BTC" },
@@ -73,5 +90,25 @@ describe("App Component", () => {
     expect(screen.getByText("BTC/ETH")).toBeInTheDocument();
     expect(screen.getByText("0.810000")).toBeInTheDocument();
     expect(screen.getAllByText("ETH/BTC")[0]).toBeInTheDocument();
+  });
+
+  it("Snapshot test", () => {
+    const mockData = {
+      TONUSDT: 1.23,
+      USDTTON: 0.81,
+    };
+    (useGetPrice as jest.Mock).mockReturnValue({
+      data: mockData,
+      isLoading: false,
+      isError: false,
+    });
+
+    const { container } = render(
+      <BrowserRouter>
+        <Price />
+      </BrowserRouter>
+    );
+
+    expect(container).toMatchSnapshot();
   });
 });

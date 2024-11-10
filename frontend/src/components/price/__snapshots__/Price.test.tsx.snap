@@ -1,0 +1,85 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Price Component > Snapshot test 1`] = `
+<div>
+  <div
+    class="container flex justify-between items-center mx-auto px-4 pt-8 pb-12 max-w-7xl"
+  >
+    <h4
+      class="font-semibold text-white text-center sm:text-left"
+    >
+      TON/USDT
+       Price
+    </h4>
+    <a
+      class="text-green-500 hover:underline"
+      href="/history"
+    >
+      History
+    </a>
+  </div>
+  <div
+    class="flex justify-center"
+  >
+    <select
+      class="bg-green-600 border-l-green-500 text-white p-1.5 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 w-[40%]"
+    >
+      <option
+        value="TON/USDT"
+      >
+        TON/USDT
+      </option>
+      <option
+        value="ETH/BTC"
+      >
+        ETH/BTC
+      </option>
+      <option
+        value="BTC/USDT"
+      >
+        BTC/USDT
+      </option>
+    </select>
+  </div>
+  <div
+    class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto my-10"
+  >
+    <div
+      class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20"
+    >
+      <h2
+        class="text-xl font-semibold text-blue-200 mb-4"
+      >
+        TON/USDT
+      </h2>
+      <div
+        class="flex items-baseline justify-between"
+      >
+        <span
+          class="text-3xl font-bold text-white"
+        >
+          1.230000
+        </span>
+      </div>
+    </div>
+    <div
+      class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20"
+    >
+      <h2
+        class="text-xl font-semibold text-blue-200 mb-4"
+      >
+        USDT/TON
+      </h2>
+      <div
+        class="flex items-baseline justify-between"
+      >
+        <span
+          class="text-3xl font-bold text-white"
+        >
+          0.810000
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
