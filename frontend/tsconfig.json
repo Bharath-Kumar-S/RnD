@@ -6,7 +6,13 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["vitest", "node", "@testing-library/jest-dom"],
+    "types": [
+      "vitest",
+      "node",
+      "@testing-library/jest-dom",
+      "vite/client",
+      "vitest/globals"
+    ],
     "paths": {
       "@/*": ["./src/*"]
     }
