@@ -42,3 +42,5 @@ app.listen(PORT, () => {
     console.log(err);
   }
 });
+
+export default app;
