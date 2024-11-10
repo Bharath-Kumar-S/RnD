@@ -58,9 +58,9 @@ describe("Price Component", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getAllByText("TON/USDT")[1]).toBeInTheDocument();
+    expect(screen.getAllByText("TONUSDT")[0]).toBeInTheDocument();
     expect(screen.getByText("1.230000")).toBeInTheDocument();
-    expect(screen.getByText("USDT/TON")).toBeInTheDocument();
+    expect(screen.getByText("USDTTON")).toBeInTheDocument();
     expect(screen.getByText("0.810000")).toBeInTheDocument();
   });
 
@@ -87,9 +87,9 @@ describe("Price Component", () => {
 
     expect(screen.getByText("ETH/BTC Price")).toBeInTheDocument();
     expect(screen.getByText("1")).toBeInTheDocument();
-    expect(screen.getByText("BTC/ETH")).toBeInTheDocument();
+    expect(screen.getByText("BTCETH")).toBeInTheDocument();
     expect(screen.getByText("0.810000")).toBeInTheDocument();
-    expect(screen.getAllByText("ETH/BTC")[0]).toBeInTheDocument();
+    expect(screen.getAllByText("ETHBTC")[0]).toBeInTheDocument();
   });
 
   it("Snapshot test", () => {

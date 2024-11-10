@@ -1,7 +1,8 @@
 import { settings } from "@/settings";
+import { PriceData } from "@/types/price";
 import { useQuery } from "@tanstack/react-query";
 
-const getPrice = async (currency: string) => {
+const getPrice = async (currency: string): Promise<PriceData> => {
   const response = await fetch(
     `${settings.api.baseUrl}/price?symbol=${currency}`
   );
@@ -12,7 +13,7 @@ const getPrice = async (currency: string) => {
     );
   }
 
-  const data = await response.json();
+  const data: PriceData = await response.json();
   return data;
 };
 

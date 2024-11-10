@@ -50,7 +50,7 @@ exports[`Price Component > Snapshot test 1`] = `
       <h2
         class="text-xl font-semibold text-blue-200 mb-4"
       >
-        TON/USDT
+        TONUSDT
       </h2>
       <div
         class="flex items-baseline justify-between"
@@ -68,7 +68,7 @@ exports[`Price Component > Snapshot test 1`] = `
       <h2
         class="text-xl font-semibold text-blue-200 mb-4"
       >
-        USDT/TON
+        USDTTON
       </h2>
       <div
         class="flex items-baseline justify-between"

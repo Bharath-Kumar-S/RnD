@@ -12,7 +12,7 @@ export const getPrice = async (req: Request, res: Response) => {
   }
 
   const pair = String(symbol).replace(/\//g, "");
-  const reversePair = String(symbol).split("/").reverse().join("");
+  const reversePair = String(symbol).split("/").reverse().join("/");
   const redisKey = `price:${pair}`;
 
   try {
@@ -32,7 +32,7 @@ export const getPrice = async (req: Request, res: Response) => {
     const tonUsdtPrice = parseFloat(data.price);
 
     const prices = {
-      [pair]: tonUsdtPrice,
+      [`${symbol}`]: tonUsdtPrice,
       [reversePair]: 1 / tonUsdtPrice,
     };
 

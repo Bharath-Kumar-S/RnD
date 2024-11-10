@@ -1,19 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useGetPrice } from "@/hooks/api/useGetPrice";
 import { PriceCard } from "./PriceCard/PriceCard";
 import { Link } from "react-router-dom";
 
 export const Price = () => {
   const [currency, setCurrency] = useState("TON/USDT");
-  const invertedCurrency = useMemo(
-    () => currency.split("/").reverse().join("/"),
-    [currency]
-  );
   const { data, isError, isLoading } = useGetPrice(currency);
-  const price = data ? data[currency.replace("/", "")] : null;
-  const invertedPrice = data
-    ? data[currency.split("/").reverse().join("")]
-    : null;
 
   return (
     <>
@@ -45,10 +37,10 @@ export const Price = () => {
         {isError && (
           <p className="text-center text-red-500">Error fetching data.</p>
         )}
-        {price && <PriceCard currency={currency} price={price} />}
-        {invertedPrice && (
-          <PriceCard currency={invertedCurrency} price={invertedPrice} />
-        )}
+        {data &&
+          Object.entries(data).map(([pair, price]) => (
+            <PriceCard key={pair} pair={pair} price={price} />
+          ))}
       </div>
     </>
   );
