@@ -1,50 +1,51 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Built with vite, react, react-router-dom, react query, custom hooks, tailwind
+There is a 30 min cache set in react query to efficiently make use of resources
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before running the project locally or in Docker, ensure you have the following installed:
 
-## Expanding the ESLint configuration
+- [Node.js](https://nodejs.org/) (Recommended version: v18+)
+- [Docker](https://www.docker.com/get-started)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Running Locally
 
-- Configure the top-level `parserOptions` property like this:
+### Frontend
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Navigate to the frontend directory:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   ```bash
+   cd frontend
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+2. Install dependencies
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   ```bash
+   npm install
+   ```
+
+3. Add env file
+   Modify `.env` file in frontend folder
+   To run locally you have the `.env` already
+
+   ```bash
+   VITE_API_URL=http://localhost:5001
+   VITE_ENV=dev
+   VITE_QUERY_CACHE_TIME=1800000
+   ```
+
+4. Run local server
+
+   ```bash
+   npm run dev
+   ```
+
+5. Run tests
+
+   ```bash
+   npm run test
+   ```
+
+   Runs test for custom hooks and Components.
