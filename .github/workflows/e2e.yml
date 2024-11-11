@@ -2,9 +2,9 @@ name: E2E Tests
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
       - name: Test API Connectivity
         run: curl -I https://api.binance.com/api/v3/ticker/price
 
-      - name: Wait for Services
+      - name: Wait for Backend Service
         run: |
           until $(curl --output /dev/null --silent --head --fail http://localhost:5001); do
             printf '.'
@@ -52,7 +52,7 @@ jobs:
           done
         timeout-minutes: 5
 
-       - name: Wait for Services
+      - name: Wait for Frontend Service
         run: |
           until $(curl --output /dev/null --silent --head --fail http://localhost:5173); do
             printf '.'
