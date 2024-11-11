@@ -20,6 +20,7 @@ export const Price = () => {
 
       <div className="flex justify-center">
         <select
+          name="currency"
           value={currency}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
             setCurrency(e.target.value)
