@@ -2,18 +2,23 @@ import { Response, Request } from "express";
 import * as dotenv from "dotenv";
 import { PriceHistory } from "@/models/priceHistory";
 import { redisClient } from "@/service/redis";
+import { PriceData, Prices } from "@/types/price";
+
 dotenv.config();
 
-export const getPrice = async (req: Request, res: Response) => {
-  const symbol = req.query.symbol;
+export const getPrice = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const symbol: string | undefined = req.query.symbol as string | undefined;
 
   if (!symbol) {
     return res.status(400).json({ error: "Symbol is required" });
   }
 
-  const pair = String(symbol).replace(/\//g, "");
-  const reversePair = String(symbol).split("/").reverse().join("/");
-  const redisKey = `price:${pair}`;
+  const pair: string = symbol.replace(/\//g, "");
+  const reversePair: string = symbol.split("/").reverse().join("/");
+  const redisKey: string = `price:${pair}`;
 
   try {
     const cachedPrice = await redisClient.get(redisKey);
@@ -28,10 +33,10 @@ export const getPrice = async (req: Request, res: Response) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
-    const tonUsdtPrice = parseFloat(data.price);
+    const data: PriceData = await response.json();
+    const tonUsdtPrice: number = parseFloat(data.price);
 
-    const prices = {
+    const prices: Prices = {
       [`${symbol}`]: tonUsdtPrice,
       [reversePair]: 1 / tonUsdtPrice,
     };
@@ -44,6 +49,7 @@ export const getPrice = async (req: Request, res: Response) => {
 
     await newPriceHistory.save();
     await redisClient.setEx(redisKey, 1800, JSON.stringify(prices));
+
     return res.status(200).json(prices);
   } catch (error) {
     console.error("Error fetching data:", error);
