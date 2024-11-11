@@ -1,7 +1,12 @@
 import { createClient } from "redis";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+const redisHost = process.env.REDIS_HOST || "redis";
+const redisPort = process.env.REDIS_PORT || "6379";
 
 export const redisClient = createClient({
-  url: "redis://localhost:6379",
+  url: `redis://${redisHost}:${redisPort}`,
 });
 
 (async () => {
