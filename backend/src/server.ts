@@ -8,7 +8,7 @@ import { historyRouter } from "@/router/historyRouter";
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT ?? 5001;
 
 app.use(cors());
@@ -21,7 +21,7 @@ app.get("/health-check", (req: Request, res: Response) => {
 app.use("/price", priceRouter);
 app.use("/history", historyRouter);
 
-app.listen(PORT, () => {
+export const server = app.listen(PORT, () => {
   console.log(
     `⚡️⚡️⚡️[server]: Server is running at https://localhost:${PORT} ⚡️⚡️⚡️`
   );
@@ -42,5 +42,3 @@ app.listen(PORT, () => {
     console.log(err);
   }
 });
-
-export default app;

@@ -1,4 +1,4 @@
-import app from "@/server";
+import { app, server } from "@/server";
 import mongoose from "mongoose";
 import request from "supertest";
 import { MongoMemoryServer } from "mongodb-memory-server";
@@ -20,6 +20,7 @@ afterAll(async () => {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
   await mongoServer.stop();
+  await server.close();
 });
 
 beforeEach(() => {
