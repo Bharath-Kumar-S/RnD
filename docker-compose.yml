@@ -12,6 +12,8 @@ services:
       - VITE_QUERY_CACHE_TIME=1800000
     depends_on:
       - backend
+    networks:
+      - default
 
   backend:
     build:
@@ -27,6 +29,8 @@ services:
     depends_on:
       - mongo
       - redis
+    networks:
+      - default
 
   mongo:
     image: mongo:latest
@@ -42,3 +46,7 @@ services:
 
 volumes:
   mongo-data:
+
+networks:
+  default:
+    driver: bridge
