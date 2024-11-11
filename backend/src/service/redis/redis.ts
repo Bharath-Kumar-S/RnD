@@ -1,5 +1,6 @@
 import { createClient } from "redis";
 import * as dotenv from "dotenv";
+
 dotenv.config();
 
 const redisHost = process.env.REDIS_HOST || "redis";
@@ -11,9 +12,13 @@ export const redisClient = createClient({
 
 (async () => {
   try {
-    redisClient.on("error", (err) => console.log("Redis Client Error", err));
-    await redisClient.connect();
-    console.log("Connected to Redis");
+    if (process.env.NODE_ENV !== "test") {
+      redisClient.on("error", (err) => console.log("Redis Client Error", err));
+      await redisClient.connect();
+      console.log("Connected to Redis");
+    } else {
+      console.log("Skipping Redis connection in test environment");
+    }
   } catch (error) {
     console.error("Error connecting to Redis:", error);
   }
