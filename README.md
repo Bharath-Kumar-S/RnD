@@ -16,7 +16,7 @@ Before running the project locally or in Docker, ensure you have the following i
 Find the detailed information in respective folders
 
 - [Frontend](./frontend/README.md)
-- [Backend](./backend/Readme.md)
+- [Backend](./backend/README.md)
 
 ## Running Locally
 
