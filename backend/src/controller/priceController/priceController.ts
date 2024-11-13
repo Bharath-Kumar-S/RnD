@@ -1,10 +1,8 @@
 import { Response, Request } from "express";
-import * as dotenv from "dotenv";
 import { PriceHistory } from "@/models/priceHistory";
 import { redisClient } from "@/service/redis";
 import { PriceData, Prices } from "@/types/price";
-
-dotenv.config();
+import { settings } from "@/settings";
 
 export const getPrice = async (
   req: Request,
@@ -26,7 +24,7 @@ export const getPrice = async (
       return res.status(200).json(JSON.parse(cachedPrice));
     }
 
-    const pricingServiceUrl = `${process.env.PRICING_SERVICE_API}?symbol=${pair}`;
+    const pricingServiceUrl = `${settings.pricingServiceApi}?symbol=${pair}`;
     const response = await fetch(pricingServiceUrl);
 
     if (!response.ok) {
