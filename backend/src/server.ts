@@ -1,15 +1,15 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-import * as dotenv from "dotenv";
+
 import cors from "cors";
 import { redisClient } from "@/service/redis";
 import { priceRouter } from "@/router/priceRouter";
 import { historyRouter } from "@/router/historyRouter";
-
-dotenv.config();
+import { analyticsRouter } from "./router/analyticsRouter";
+import { settings } from "./settings";
 
 export const app = express();
-const PORT = process.env.PORT ?? 5001;
+const PORT = settings.port ?? 5001;
 
 app.use(cors());
 app.use(express.json());
@@ -20,6 +20,7 @@ app.get("/health-check", (req: Request, res: Response) => {
 
 app.use("/price", priceRouter);
 app.use("/history", historyRouter);
+app.use("/analytics", analyticsRouter);
 
 export const server = app.listen(PORT, () => {
   console.log(
@@ -30,8 +31,8 @@ export const server = app.listen(PORT, () => {
   }
   try {
     console.log("app is started");
-    if (!(process.env.NODE_ENV === "test")) {
-      mongoose.connect(`${process.env.DBSTRING}`);
+    if (!(settings.nodeEnv === "test")) {
+      mongoose.connect(`${settings.dbString}`);
       const db = mongoose.connection;
       db.on("error", (err) => {
         console.error(err);
