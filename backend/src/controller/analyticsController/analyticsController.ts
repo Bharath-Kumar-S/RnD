@@ -10,7 +10,7 @@ export const getMarketAnalytics = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Currency symbol is required" });
     }
 
-    const redisKey: string = `price:${currency}`;
+    const redisKey: string = `analytics:${currency}`;
     const cachedData = await redisClient.get(redisKey);
     if (cachedData) {
       return res.status(200).json(JSON.parse(cachedData));
