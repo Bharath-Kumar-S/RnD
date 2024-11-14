@@ -9,4 +9,5 @@ export const settings = {
   analyticsServiceApi: process.env.ANALYTICS_SERVICE_API,
   port: process.env.PORT,
   nodeEnv: process.env.NODE_ENV,
+  redisTtl: process.env.REDIS_TTL,
 };

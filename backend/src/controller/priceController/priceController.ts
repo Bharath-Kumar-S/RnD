@@ -46,7 +46,11 @@ export const getPrice = async (
     });
 
     await newPriceHistory.save();
-    await redisClient.setEx(redisKey, 1800, JSON.stringify(prices));
+    await redisClient.setEx(
+      redisKey,
+      Number(settings.redisTtl),
+      JSON.stringify(prices)
+    );
 
     return res.status(200).json(prices);
   } catch (error) {

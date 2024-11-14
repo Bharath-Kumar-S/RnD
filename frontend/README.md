@@ -1,6 +1,6 @@
 # Frontend
 
-Built with vite, react, react-router-dom, react query, custom hooks, tailwind
+Built with vite, react, react-router-dom, react query, rechart, custom hooks, tailwind
 There is a 30 min cache set in react query to efficiently make use of resources
 
 ## Prerequisites

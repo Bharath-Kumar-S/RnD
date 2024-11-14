@@ -29,7 +29,32 @@ Before running the project locally or in Docker, ensure you have the following i
    }
    ```
 
-2. price
+2. analytics
+
+   ```bash
+   http://localhost:5001/analytics?currency=TONUSDT
+
+   HTTP/1.1 200 OK
+
+   {
+      "historical_prices": [
+         6.218,
+         6.619,
+         6.673,
+         6.21,
+         6.27,
+         6.456,
+         6.89,
+         6.597,
+         6.538,
+      ],
+      "latest_price": 5.446,
+      "previous_day_price": 5.222,
+      "price_percentage": "4.29"
+   }
+   ```
+
+3. price
 
    ```bash
    http://localhost:5001/price?symbol=TON/USDT
@@ -41,7 +66,7 @@ Before running the project locally or in Docker, ensure you have the following i
    }
    ```
 
-3. history
+4. history
 
    ```bash
    http://localhost:5001/history
