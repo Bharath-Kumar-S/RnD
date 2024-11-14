@@ -25,7 +25,7 @@ describe("PriceCard", () => {
     const priceElement = screen.getByText("200");
 
     expect(pairElement).toHaveClass("font-semibold");
-    expect(priceElement).toHaveClass("font-bold");
+    expect(priceElement).toHaveClass("font-extrabold");
   });
 
   it("should match snapshots", () => {

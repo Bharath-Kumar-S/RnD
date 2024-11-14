@@ -64,7 +64,7 @@ describe("Price Component", () => {
     expect(screen.getByText("0.810000")).toBeInTheDocument();
   });
 
-  it("changes the currency when the dropdown is updated", async () => {
+  it("changes the currency when currency is updated", async () => {
     const mockData = {
       ETHBTC: 1,
       BTCETH: 0.81,
@@ -80,12 +80,7 @@ describe("Price Component", () => {
         <Price />
       </BrowserRouter>
     );
-
-    fireEvent.change(screen.getByRole("combobox"), {
-      target: { value: "ETH/BTC" },
-    });
-
-    expect(screen.getByText("ETH/BTC Price")).toBeInTheDocument();
+    fireEvent.change(screen.getByText("ETH/BTC"));
     expect(screen.getByText("1")).toBeInTheDocument();
     expect(screen.getByText("BTCETH")).toBeInTheDocument();
     expect(screen.getByText("0.810000")).toBeInTheDocument();

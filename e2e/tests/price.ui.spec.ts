@@ -9,12 +9,10 @@ test("has title", async ({ page }) => {
 });
 
 test("select a currency", async ({ page }) => {
-  await page.selectOption('select[name="currency"]', { value: "ETH/BTC" });
-
-  const selectedValue = await page
-    .locator('select[name="currency"]')
-    .inputValue();
-  expect(selectedValue).toBe("ETH/BTC");
+  await page.click("text=ETH/BTC");
+  await expect(page.locator("text=ETH/BTC")).toHaveCount(2);
+  await page.click("text=TON/USDT");
+  await expect(page.locator("text=ETH/BTC")).toHaveCount(1);
 });
 
 test("history page", async ({ page }) => {
