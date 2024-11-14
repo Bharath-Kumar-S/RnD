@@ -47,10 +47,24 @@ http://localhost:5001/
 
 Once local is up and running
 
+[More info](./e2e/README.md)
+
 ```bash
 cd e2e
 npm install
 npm run test
 ```
 
+4. Preview
+
 ![App](app.png)
+
+5. Improvements
+
+- Real-time Data with WebSockets: To improve the responsiveness of price updates, implementing WebSockets could be a better option than traditional HTTP requests.
+
+- Optimizing Performance with Svelte or Vue: While React offers a robust framework, switching to Svelte or Vue could further enhance performance.
+
+- API documentation
+
+- Efficient Data Caching with Redis: Even though we have recent information in redis with TTL of 30 mins. Instead of fetching data directly from external providers every time, we could periodically query backend endpoints to update Redis with fresh data. This would allow the frontend to access cached responses directly from Redis, improving response times and reducing call to the external data provider.

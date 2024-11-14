@@ -23,9 +23,11 @@ services:
     environment:
       - PORT=5001
       - PRICING_SERVICE_API=https://api.binance.com/api/v3/ticker/price
-      - DBSTRING=mongodb://mongo:27017/mydb
+      - ANALYTICS_SERVICE_API=https://api.binance.com/api/v3/klines
+      - DBSTRING=mongodb://mongo:27017/
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - REDIS_TTL=1800
     depends_on:
       - mongo
       - redis
@@ -38,11 +40,15 @@ services:
       - mongo-data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - default
 
   redis:
     image: redis:latest
     ports:
       - "6379:6379"
+    networks:
+      - default
 
 volumes:
   mongo-data:

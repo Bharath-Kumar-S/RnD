@@ -45,7 +45,11 @@ export const getMarketAnalytics = async (req: Request, res: Response) => {
       price_percentage: pricePercentage.toFixed(2),
     };
 
-    await redisClient.setEx(redisKey, 1800, JSON.stringify(prices));
+    await redisClient.setEx(
+      redisKey,
+      Number(settings.redisTtl),
+      JSON.stringify(prices)
+    );
 
     return res.status(200).send(prices);
   } catch (error) {
