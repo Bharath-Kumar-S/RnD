@@ -1,4 +1,4 @@
-# RnD
+# Whale.io - RnD
 
 ## Overview
 
@@ -52,3 +52,5 @@ cd e2e
 npm install
 npm run test
 ```
+
+![App](app.png)
