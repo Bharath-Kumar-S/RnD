@@ -4,7 +4,7 @@
 
 ## Overview
 
-[requirements](Test Assignment for Senior FullStack Developer.pdf)
+[requirements](./Test Assignment for Senior FullStack Developer.pdf)
 
 This project consists of a frontend and a backend. The frontend is built with [React] and the backend is built with [Node.js/Express/Redis/MongoDB]. You can run both the frontend and backend locally, or you can run them together in Docker containers.
 
